@@ -1,2 +1,2 @@
-# https-github.com-boram0415-algorithm
-This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# algorithm
+1일1
