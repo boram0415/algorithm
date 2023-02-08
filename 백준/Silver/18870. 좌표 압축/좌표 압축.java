@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int[] nums = new int[Integer.parseInt(br.readLine())];
+        int w =0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        while (st.hasMoreTokens()) {
+            nums[w++] = Integer.parseInt(st.nextToken());
+        }
+
+        Set<Integer> set = new TreeSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            set.add(nums[i]);
+        }
+
+        int[] arr = new int[set.size()];
+        Iterator i = set.iterator();
+        int j = 0;
+        while (i.hasNext()) {
+            arr[j++] = Integer.parseInt(i.next().toString());
+        }
+        //이진탐색
+
+        for (int x = 0; x < nums.length; x++) {
+            int find = nums[x];
+            int mid ;
+            int left =0 , right =arr.length-1;
+            while (left <= right) {
+
+                mid= (right+left)/2;
+
+                if (find == arr[mid]) {
+                    sb.append(mid + " ");
+                }
+
+                if (find < arr[mid]) {
+                    right = mid -1;
+                }else{
+                    left = mid +1;
+                }
+
+            }
+        }
+        System.out.println(sb);
+    }
+}
