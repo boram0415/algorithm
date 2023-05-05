@@ -19,21 +19,19 @@ public class Main {
                     cnt++;
                 }
             }
-            // 카운트와 인덱스 값이 일치하면 해당 위치 인덱스 값 answer에 담기
+            // 카운트와 인덱스 값이 일치하면 해당 위치 인덱스 값 sb에 담기
             for (int x = 1; x < arr.length; x++) {
                 if (cnt == x) {
-                    answer = arr[x];
+                    sb.append(arr[x]+"\n");
+                    break;
+                }
+                // cnt == 0 일 경우 모를 뜻함
+                if (cnt == 0) {
+                    sb.append("E\n");
                     break;
                 }
             }
-            // answer 값이 있을 경우 도,개,걸,윷 중 하나
-            if (answer != ' ') {
-                sb.append(answer+"\n");
-                // 없을 경우 모 
-            } else {
-                sb.append("E\n");
-            }
-
+           
         }
         System.out.println(sb);
     }
