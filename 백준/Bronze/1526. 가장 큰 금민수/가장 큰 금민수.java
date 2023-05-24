@@ -7,16 +7,14 @@ class Main {
         int n = Integer.parseInt(br.readLine());
         for (int i = n; i > 3; i--) {
             String tmp = i + "";
-            int len = tmp.length();
-            for (int j = 0; j < len; j++) {
-                if ("4".equals(tmp.charAt(j)+"") || "7".equals(tmp.charAt(j)+"")) {
-                    cnt++;
-                }else{
-                    cnt=0;
+            boolean ch = true;
+            for (int j = 0; j < tmp.length(); j++) {
+                if (!("4".equals(tmp.charAt(j)+"")) && !("7".equals(tmp.charAt(j)+""))) {
+                    ch = false;
                     break;
                 }
             }
-            if (cnt == len) {
+            if (ch) {
                 System.out.print(i);
                 return;
             }
