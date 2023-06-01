@@ -1,26 +1,27 @@
 import java.io.*;
-public class Main {
-    public static void main(String[] args) throws IOException {
+import java.util.*;
+
+class Main{
+    public static void main(String[] agrs) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
         int t = Integer.parseInt(br.readLine());
-        while (t > 0) {
-            t--;
-            sb.append(br.readLine());
-            boolean result = true;
-            for (int i = 0; 0<sb.length(); i++) {
-                int idx = sb.toString().indexOf("()");
-                if (idx < 0) {
-                    result = false;
-                    break;
+        
+        for(int i=0;i<t;i++){
+            String str = br.readLine();
+            Stack<Character> st = new Stack<>();
+            for(int j=0;j<str.length();j++){
+                if(str.charAt(j) == '(') {
+                    st.push('(');
+                }else if(str.charAt(j) == ')' && st.empty() == false 
+                        && st.peek() == '('){
+                    st.pop();
+                }else{
+                    st.push(')');
                 }
-                sb.deleteCharAt(idx).deleteCharAt(idx);
             }
-            bw.write(result == true ? "YES\n":"NO\n");
-            sb.setLength(0);
+            sb.append(st.size() == 0 ? "YES\n" : "NO\n");
         }
-        bw.flush();
-        bw.close();
+        System.out.print(sb);
     }
 }
