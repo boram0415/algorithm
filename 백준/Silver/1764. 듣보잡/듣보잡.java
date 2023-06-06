@@ -1,37 +1,37 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
-
+class Main{
+    public static void main(String [] args) throws IOException{
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        StringBuilder sb = new StringBuilder();
         Set<String> set = new HashSet<>();
         Set<String> tSet = new TreeSet<>();
-
-        for (int i = 0; i < n; i++) {
+        
+        // 듣도 못한 사람 초기화
+        for(int i=0;i<n;i++){
             set.add(br.readLine());
         }
-
+        
         String str ;
-        int cnt = 0;
-
-        while (m>0) {
-            m--;
+        // 보도 못한 사람 입력받으면서 듣도 못한사람과 비교
+        for(int i=0;i<m;i++){
             str = br.readLine();
-            if (set.contains(str)) {
-                cnt++;
+            if(set.contains(str)){
                 tSet.add(str);
             }
         }
+        
+        StringBuilder sb = new StringBuilder();
+        
         Iterator it = tSet.iterator();
-        while(it.hasNext()) {
+        while(it.hasNext()){
             sb.append(it.next()).append("\n");
         }
-        System.out.println(tSet.size()+"\n"+sb);
-
+        System.out.println(tSet.size() + "\n" + sb);
     }
+    
 }
