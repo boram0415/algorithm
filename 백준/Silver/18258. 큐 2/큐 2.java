@@ -1,39 +1,41 @@
 import java.util.*;
 import java.io.*;
-public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int t = Integer.parseInt(br.readLine());
-        Deque<Integer> qu = new ArrayDeque<>();
-        StringTokenizer st ;
 
-        while (t > 0) {
-            t--;
+class Main{
+    public static void main(String[] agrs) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));       
+        Deque<String> de = new ArrayDeque<>();
+        StringTokenizer st;
+        // 제일 처음 정수 입력
+        int t = Integer.parseInt(br.readLine());
+        while(t-- > 0){
+            boolean flag = de.size()==0;
             st = new StringTokenizer(br.readLine());
-            boolean flag = qu.isEmpty();
-            switch (st.nextToken()) {
-                case "push" :
-                    qu.add(Integer.parseInt(st.nextToken()));
+            switch(st.nextToken()){
+                case "push" : 
+                    de.add(st.nextToken());
                     break;
-                case "front" :
-                    bw.write(flag == true ? "-1\n" : qu.peek()+"\n");
+                case "pop" : 
+                    bw.write(flag==true ? "-1\n" : de.pollFirst()+"\n");
                     break;
-                case "back" :
-                    bw.write(flag == true ? "-1\n" : qu.peekLast()+"\n");
+                case "size" : 
+                    bw.write(de.size()+"\n");
                     break;
-                case "size" :
-                    bw.write(qu.size()+"\n");
+                case "empty" : 
+                    bw.write(de.isEmpty()==true ? "1\n" : "0\n");
                     break;
-                case "pop" :
-                    bw.write(flag == true ? "-1\n" : qu.pollFirst()+"\n");
+                case "front" : 
+                    bw.write(flag==true ? "-1\n" : de.peek()+"\n");
                     break;
-                case "empty" :
-                    bw.write(flag == true ? "1\n": "0\n");
+                case "back" : 
+                    bw.write(flag==true ? "-1\n" : de.peekLast()+"\n");
                     break;
             }
         }
         bw.flush();
         bw.close();
     }
+    
+    
 }
