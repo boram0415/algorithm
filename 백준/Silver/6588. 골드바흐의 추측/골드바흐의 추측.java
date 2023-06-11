@@ -23,7 +23,7 @@ class Main {
         while ((n = Integer.parseInt(br.readLine())) != 0) {
             for (int i = 2; i < n; i++) {
                 if (!prime[i] && !prime[n-i]) {
-                    sb.append(n).append(" = ").append(i).append(" + " ).append(n-i).append("\n");
+                    sb.append(n + " = " + i + " + " + (n-i) + "\n" );
                     ch = true;
                     break;
                 }
