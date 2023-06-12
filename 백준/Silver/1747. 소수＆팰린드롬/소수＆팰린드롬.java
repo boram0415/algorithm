@@ -3,7 +3,7 @@ import java.util.*;
 
 class Main {
 
-    static int N = 1000000 * 2;
+    static int N = 1003001;
     static boolean palindrome(int n) {
         int cp = n,rev = 0;
         while (cp != 0) {
