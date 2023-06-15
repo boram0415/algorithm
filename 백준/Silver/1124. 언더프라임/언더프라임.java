@@ -1,43 +1,33 @@
 import java.io.*;
 import java.util.*;
-
-public class Main {
-    static StringBuilder sb;
-    static boolean []isPrime;
-
+class Main {
+    static int[] prime = {2, 3, 5, 7, 11, 13, 17};
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
-        isPrime = new boolean[B+1];
-        isPrime[0] = isPrime[1] = true;
-
-        for (int i = 2; i <= (int) Math.sqrt(B); i++) {
-            for (int j = i*i; j <= B; j += i) {
-                if (!isPrime[j]) isPrime[j] = true;
-            }
-        }
         int cnt = 0;
-        for (int i = A; i <=B; i++) {
-            if (isPrime[i]) {
-                if(!fnc(i)) cnt++;
+        for (int i = A; i <= B; i++) {
+            int n = fnc(i);
+            if (n > 1 && Arrays.binarySearch(prime, n) > -1) {
+                cnt++;
             }
         }
         System.out.println(cnt);
     }
 
-    static boolean fnc(int n) {
-        int cnt = 0 ,i=2;
-        while (n != 1) {
-            if (n % i == 0) {
-                n /=i;
+    static int fnc(int n) {
+        int cnt = 0;
+        for (int x = 2; x <= (int) Math.sqrt(n); x++) {
+            while (n % x == 0) {
+                n /= x;
                 cnt++;
-                continue;
             }
-            i++;
         }
-        return isPrime[cnt];
+        if (n != 1) {
+            cnt++;
+        }
+        return cnt;
     }
-
 }
