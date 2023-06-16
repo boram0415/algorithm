@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
         int a = Integer.parseInt(st.nextToken());
         int min = Math.min(Integer.parseInt(st.nextToken()), N);
@@ -23,12 +23,11 @@ public class Main {
         
         for (int i = a; i <= min; i++) {
             if (!isPrime[i]) {
-                if (pal(i)) bw.write(i + "\n");
+                if (pal(i)) sb.append(i + "\n");
             }
         }
-        bw.write("-1");
-        bw.flush();
-        bw.close();
+        sb.append(-1);
+        System.out.print(sb);
     }
 
     static boolean pal(int n) {
