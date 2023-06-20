@@ -3,7 +3,7 @@ import java.io.*;
 public class Main {
     public static void main(String args[]) throws IOException {
         int n = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
-        for (int i = 1_000_000; i >= 0; i--) {
+        for (int i = 100; i >= 0; i--) {
             if (sum(n-i) == n) {
                 System.out.println((n-i));
                 return;
