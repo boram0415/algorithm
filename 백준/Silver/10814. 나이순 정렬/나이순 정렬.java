@@ -1,25 +1,29 @@
-import java.io.*;
 import java.util.*;
-
-public class Main {
-
-    public static void main(String[] args) throws IOException {
+import java.io.*;
+class Main {
+    public static void main(String args[]) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(br.readLine());
-        String[][] arr = new String[N][2];
+        StringBuilder[] sb = new StringBuilder[201];
+        StringTokenizer st ;
+
         for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            arr[i][0] = st.nextToken();
-            arr[i][1] = st.nextToken();
+            st = new StringTokenizer(br.readLine());
+            int age = Integer.parseInt(st.nextToken());
+            if(sb[age] == null) {
+                sb[age] = new StringBuilder();
+            }
+            sb[age].append(age).append(" ").append(st.nextToken()).append("\n");
         }
-        Arrays.sort(arr, (e1, e2) -> {
-            return Integer.parseInt(e1[0]) - Integer.parseInt(e2[0]);
-        });
-        for (int i = 0; i < arr.length; i++) {
-            sb.append(arr[i][0] + " " + arr[i][1] + "\n");
+
+        for(StringBuilder str : sb){
+            if (str != null) {
+                bw.write(str.toString());
+            }
         }
-        System.out.println(sb);
+        bw.flush();
+        bw.close();
     }
 }
