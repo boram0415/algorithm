@@ -8,20 +8,19 @@ public class Main {
         String[] str = br.readLine().split(" ");
         int N = Integer.parseInt(str[0]);
         int K = Integer.parseInt(str[1]);
-        List<Integer> list = new ArrayList<>();
-        int cnt=0;
+        int result = 0,cnt=0;
         for (int i = 1; i <= N; i++) {
             if (N % i == 0) {
-                list.add(i);
+                cnt++;
+                result = i;
             }
+            if(cnt == K) break;
         }
 
-        if (list.size() >= K) {
-            System.out.println(list.get(K-1));
+        if (cnt == K) {
+            System.out.println(result);
         }else{
             System.out.println(0);
         }
-
-
     }
 }
