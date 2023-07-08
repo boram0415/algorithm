@@ -1,87 +1,66 @@
-import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 public class Main {
-    static int cnt, k,result=-1;
-    static int[] tmp = new int[5000001];
-    static boolean flag = false;
-    static int[] re ;
-
+    static int[] tmp = new int[500_005];
+    static int[] a = new int[500_005];
+    static int k, res;
     public static void main(String[] args) throws Exception {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int A = Integer.valueOf(st.nextToken());
-        int K = Integer.valueOf(st.nextToken());
-        int arr[] = new int[A];
-        k=K;
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < A; i++) {
-            arr[i] = Integer.valueOf(st.nextToken());
+        int n = readI(), i;
+        k = readI();
+        for (i = 0; i < n; i++){
+            a[i] = readI();
         }
-        mergeSort(arr);
-//        System.out.println(Arrays.toString(arr));
-        System.out.println(result);
-    }
-
-    private static void check(int change) {
-        if (++cnt == k) {
-            result = change;
-            flag = true;
+        merge_sort(0, n-1);
+        if (k > 0)
+            System.out.println(-1);
+        else {
+            System.out.println(res);
         }
     }
 
-    private static boolean mergeSort(int[] arr) {
-        return mergeSort(arr, 0, arr.length - 1);
-    }
-
-    private static boolean mergeSort(int[] arr, int start, int end) {
-        if (start < end && !flag) {
-            int mid = (start + end) / 2;
-            mergeSort(arr, start, mid);
-            mergeSort(arr, mid + 1, end);
-            merge(arr, start, mid, end);
+    static void merge_sort(int p, int r){
+        if (p < r){
+            int q = (p + r) / 2;
+            merge_sort(p, q);
+            merge_sort(q + 1, r);
+            merge(p, q, r);
         }
-        return flag;
     }
 
-    private static boolean merge(int[] arr,int start, int mid, int end) {
-
-        int part1 = start;
-        int part2 = mid+1;
-        int idx = start;
-
-        while (part1 <= mid && part2 <= end && !flag) {
-            if (arr[part1] <= arr[part2]) {
-                tmp[idx] = arr[part1++];
-            } else {
-                tmp[idx] = arr[part2++];
+    static void merge(int p, int q, int r){
+        int i = p, j = q + 1, t = 0;
+        while (i <= q && j <= r){
+            if (a[i] <= a[j]){
+                tmp[t] = a[i];
+                t++;
+                i++;
             }
-            check(tmp[idx]);
-            idx++;
+            else {
+                tmp[t] = a[j];
+                t++;
+                j++;
+            }
         }
-
-        if(flag) return true;
-
-        // 남은 인자값 넣기
-        while(part1 <= mid && !flag) {
-            tmp[idx] = arr[part1++];
-            check(tmp[idx]);
-            idx++;
+        while (i <= q)
+            tmp[t++] = a[i++];
+        while (j <= r)
+            tmp[t++] = a[j++];
+        i = p;
+        t = 0;
+        while (i <= r && k > 0){
+            res = a[i++] = tmp[t++];
+            k--;
         }
+    }
 
-        while(part2 <= end && !flag) {
-            tmp[idx] = arr[part2++];
-            check(tmp[idx]);
-            idx++;
+    static int readI() throws Exception{
+        int c, n = 0;
+        while (true){
+            c = System.in.read() - 48;
+            if (c < 0 || c > 9)
+                return n;
+            n = n * 10 + c;
         }
-
-        for (int t = start; t <= end; t++) {
-            arr[t] = tmp[t];
-        }
-
-        if(flag) return true;
-
-        return false;
     }
 
 }
+
