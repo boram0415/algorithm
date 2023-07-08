@@ -1,19 +1,22 @@
 import java.io.*;
-import java.util.*;
 
-public class Main {
-    public static void main(String[] args) throws Exception{
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        PriorityQueue<Integer> priQ = new PriorityQueue<>(Collections.reverseOrder());
-
-        int size = Integer.parseInt(br.readLine());
-        for(int i = 0; i < size; i++) {
-            priQ.add(Integer.parseInt(br.readLine()));
-        }
-        while(!priQ.isEmpty()) sb.append(priQ.poll()).append("\n");
-        System.out.println(sb.toString().trim());
-    }
-
+class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int n = Integer.parseInt(br.readLine());
+		boolean[] visited = new boolean[2000001];
+        
+		for (int i = 0; i < n; i++) {
+			visited[Integer.parseInt(br.readLine())+1000000] = true;
+		}
+		
+		for (int i = visited.length-1; i >= 0; i--) {
+			if (!visited[i]) continue;
+			bw.append((i-1000000)+"\n");
+		}
+        
+		bw.flush();
+        bw.close();
+	}
 }
