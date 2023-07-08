@@ -1,19 +1,23 @@
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
 public class Main {
+    static final int N = 2000001;
     public static void main(String[] args) throws Exception{
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        PriorityQueue<Integer> priQ = new PriorityQueue<>();
-
         int size = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
         for(int i = 0; i < size; i++) {
-            priQ.add(Integer.parseInt(br.readLine()));
+            arr[Integer.parseInt(br.readLine())+1000000]++;
         }
-        while(!priQ.isEmpty()) sb.append(priQ.poll()).append("\n");
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] >= 0){
+                for (int j = 0; j < arr[i]; j++) {
+                    sb.append(i-1000000).append("\n");
+                }
+            }
+        }
         System.out.println(sb.toString().trim());
     }
-
 }
