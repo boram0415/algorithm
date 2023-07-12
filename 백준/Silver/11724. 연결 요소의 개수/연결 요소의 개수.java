@@ -1,10 +1,10 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
     static ArrayList<Integer>[] A;
     static boolean visited[];
     static int cnt;
-
     public static void main(String[] args) throws Exception {
         int N = read();
         int M = read();
@@ -22,20 +22,27 @@ public class Main {
         for (int i = 1; i <visited.length; i++) {
             if(!visited[i]) {
                 cnt++;
-                dfs(i);
+                bfs(i);
             }
         }
         System.out.println(cnt);
     }
 
-    private static void dfs(int node) {
-        for (int i : A[node]) {
-            if(!visited[i]){
-                visited[i] = true;
-                dfs(i);
+    private static void bfs(int node) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(node);
+        visited[node]=true;
+        while (!q.isEmpty()) {
+            int newNode = q.poll();
+            for (int i : A[newNode]) {
+                if(!visited[i]){
+                    visited[i]=true;
+                    q.add(i);
+                }
             }
         }
     }
+
     private static int read() throws Exception {
         int c, n = 0;
         while (true) {
@@ -44,4 +51,5 @@ public class Main {
             n = n * 10 + c;
         }
     }
+
 }
