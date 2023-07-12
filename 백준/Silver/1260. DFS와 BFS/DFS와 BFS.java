@@ -7,11 +7,9 @@ public class Main {
     static ArrayList<Integer> A[];
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws Exception{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int V = Integer.parseInt(st.nextToken());
+        N = read();
+        int M = read();
+        int V = read();
         A = new ArrayList[N+1];
         visited = new boolean[N+1];
         
@@ -19,9 +17,8 @@ public class Main {
             A[i] = new ArrayList<>();
         }
         for (int i = 0; i <M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int p = Integer.parseInt(st.nextToken());
-            int c = Integer.parseInt(st.nextToken());
+            int p =  read();
+            int c =  read();
             A[p].add(c);
             A[c].add(p);
         }
@@ -56,4 +53,14 @@ public class Main {
             if(!visited[i]) dfs(i);
         }
     }
+    
+      private static int read() throws Exception {
+        int c, n = 0;
+        while (true) {
+            c = System.in.read() - 48;
+            if (c < 0 || c > 9) return n;
+            n = n * 10 + c;
+        }
+    }
+
 }
