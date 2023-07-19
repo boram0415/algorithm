@@ -1,4 +1,7 @@
+import java.util.*;
+
 public class Main {
+
     static int read()throws Exception{
         int c,n=0;
         while (true) {
@@ -13,15 +16,15 @@ public class Main {
         int b = read();
         int c = read();
 
-        int arr[] = new int[1000001];
-        arr[a]++;
-        arr[b]++;
-        arr[c]++;
+        Set<Integer> map = new TreeSet<>();
+        map.add(a);
+        map.add(b);
+        map.add(c);
 
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 0) {
-                System.out.print(i+" ");
-            }
+        Iterator i = map.iterator();
+        while (i.hasNext()) {
+            System.out.print(i.next()+" ");
         }
+
     }
 }
