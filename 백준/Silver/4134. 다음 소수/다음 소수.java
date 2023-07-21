@@ -15,7 +15,7 @@ public class Main {
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-        final int ARR_SIZE = 63300;
+        final int ARR_SIZE = 63246;
         int[] primeNum = new int[ARR_SIZE];
         int T;
         long n;
