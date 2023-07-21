@@ -1,6 +1,4 @@
 public class Main {
-    static long result = 1;
-
     private static int read() throws Exception {
         int c, n = 0;
         while (true) {
@@ -11,18 +9,11 @@ public class Main {
     }
 
     private static long rec(int n) {
-        if (n == 1) return result;
-        result*=n;
-        n-=1;
-        return rec(n);
+        if (n <= 1) return 1;
+        return n * rec(n-1);
     }
 
     public static void main(String[] args) throws Exception {
-        int N = read();
-        if(N == 0) {
-            System.out.println(1);
-            return;
-        }
-        System.out.println(rec(N));
+        System.out.println(rec(read()));
     }
 }
