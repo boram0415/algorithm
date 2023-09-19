@@ -1,53 +1,61 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    static boolean flag;
+    static int cnt;
+    static ArrayList<Integer> graph[];
     static boolean visited[];
-    static ArrayList<Integer> a[];
-    static int result = 0;
-    static int node1, node2;
+    static boolean flag;
+    static int y;
 
     public static void main(String[] args) throws Exception {
         int n = read();
-        a = new ArrayList[n + 1];
+        int x = read();
+        y = read();
+        int m = read();
+
+        graph = new ArrayList[n + 1];
         visited = new boolean[n + 1];
-        node1 = read();
-        node2 = read();
-        int in = read();
 
         for (int i = 1; i <= n; i++) {
-            a[i] = new ArrayList();
+            graph[i] = new ArrayList<>();
         }
-        for (int i = 0; i < in; i++) {
+        for (int i = 0; i < m; i++) {
             int p = read();
             int c = read();
-            a[p].add(c);
-            a[c].add(p);
+            graph[p].add(c);
+            graph[c].add(p);
         }
-        visited[node1]=true;
-        dfs(node1,0);
-        System.out.println(flag ? result : -1);
+
+        dfs(x, 0);
+
+        if (flag) {
+            System.out.print(cnt);
+        } else {
+            System.out.print(-1);
+        }
+
     }
 
-    private static void dfs(int node,int count) {
-        visited[node]=true;
-        if(node== node2) {
-            result = count;
-            flag=true;
+    static void dfs(int node, int count) {
+        if (node == y) {
+            flag = true;
+            cnt = count;
+            return;
         }
 
-        for (int i : a[node]) {
-            if(!visited[i]){
-                visited[i]=true;
-                dfs(i,count+1);
+        visited[node] = true;
+
+        for (int i : graph[node]) {
+            if (!visited[i]) {
+                dfs(i, count+1);
             }
         }
 
     }
 
-    private static int read() throws Exception {
-        int c, n = 0;
+    static int read() throws IOException {
+        int c = 0, n = 0;
         while (true) {
             c = System.in.read() - 48;
             if (c < 0 || c > 9) return n;
