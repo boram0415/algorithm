@@ -5,7 +5,7 @@ class Main{
     public static void main(String[]args) throws Exception{
         BufferedReader br =  new BufferedReader(new InputStreamReader(System.in));
         HashMap<String,String> map = new HashMap<>();
-        TreeSet<String> set = new TreeSet<>(Collections.reverseOrder());
+        TreeSet<String> set = new TreeSet<>();
         StringBuilder sb = new StringBuilder();
         int N = Integer.parseInt(br.readLine());
 
@@ -22,9 +22,9 @@ class Main{
             }
         }
 
-        Iterator iter = set.iterator();	// Iterator 사용
-        while(iter.hasNext()) {//값이 있으면 true 없으면 false
-            sb.append(iter.next()).append("\n");
+        Iterator<String> itr=set.descendingIterator();	
+        while(itr.hasNext()) {
+            sb.append(itr.next()).append("\n");
         }
         System.out.print(sb);
     }
