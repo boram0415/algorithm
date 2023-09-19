@@ -5,7 +5,6 @@ public class Main {
     static int cnt;
     static ArrayList<Integer> graph[];
     static boolean visited[];
-    static boolean flag;
     static int y;
 
     public static void main(String[] args) throws Exception {
@@ -28,18 +27,12 @@ public class Main {
         }
 
         dfs(x, 0);
-
-        if (flag) {
-            System.out.print(cnt);
-        } else {
-            System.out.print(-1);
-        }
+        System.out.print(cnt > 0 ? cnt : -1);
 
     }
 
     static void dfs(int node, int count) {
         if (node == y) {
-            flag = true;
             cnt = count;
             return;
         }
