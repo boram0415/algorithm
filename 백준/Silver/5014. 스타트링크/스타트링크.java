@@ -1,55 +1,49 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 class Main{
-
     public static void main(String[]args) throws Exception{
-
-        Queue<Integer> graph = new LinkedList<>();
-        int F=read(),S=read(),G=read(),U=read(),D=read();
-        int visited []= new int[F+1];
-        int cnt=0;
-
-        // BFS
-        graph.offer(S);
-        visited[S] = 1;
-
-        while(!graph.isEmpty()){
+        int F =read(),S=read(),G=read(),U=read(),D=read();
+        boolean visited[] = new boolean[F+1];
+        int cnt=-1;
+        //BFS
+        Queue<Integer> q = new LinkedList<>();
+        visited[S] = true;
+        q.offer(S);
+        while(!q.isEmpty()){
+            int size = q.size();
             cnt++;
-            int size = graph.size();
             for(int i=0;i<size;i++){
-                int node = graph.poll();
-                // S==G
+                int node = q.poll();
+                // G
                 if(node == G) {
-                    System.out.print(cnt-1);
+                    System.out.print(cnt);
                     return;
                 }
                 // U
-                if(node+U <= F && visited[node+U] == 0){
-                    graph.offer(node+U);
-                    visited[node+U]=1;
+                if(node+U <= F && !visited[node+U]){
+                    visited[node+U] = true;
+                    q.offer(node+U);
                 }
                 // D
-                if(node-D > 0 && visited[node-D] == 0){
-                    graph.offer(node-D);
-                    visited[node-D]=1;
+                  if(node-D > 0 && !visited[node-D]){
+                    visited[node-D] = true;
+                    q.offer(node-D);
                 }
-
             }
+            
         }
         System.out.print("use the stairs");
-
     }
-
-    public static int read() throws IOException {
+    
+    static int read() throws IOException {
         int c=0,n=0;
+        
         while(true){
             c = System.in.read()-48;
-            if(c < 0 || c > 9) return n;
-            n = 10 * n + c;
-        }
-
+            if(c < 0 || c > 9 ) return n ;
+            n = n*10+c;
+        }    
     }
-
-
+      
 }
