@@ -1,25 +1,32 @@
 import java.io.*;
 import java.util.*;
 class Main{
-        static StringTokenizer st;
-    public static void main(String[]args) throws Exception{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N+1];
-        st = new StringTokenizer(br.readLine());
-        for(int i=1;i<arr.length;i++){
-            arr[i]= arr[i-1] + Integer.parseInt(st.nextToken());
+   public static void main(String[] args) throws Exception{
+       
+       int I = read(),J=read();
+       int arr[]=new int[I+1];
+       StringBuilder sb = new StringBuilder(16);
+       for(int i=1;i<=I;i++){
+           arr[i]=read();
+       }
+       
+       for(int i=1;i<=I;i++){
+           arr[i]=arr[i-1]+arr[i];
+       }
+       for(int i=0;i<J;i++){
+           int f = read(),s =read();
+           sb.append(arr[s]-arr[f-1]).append("\n");
+       }
+       System.out.print(sb);
+   }
+    
+    public static int read() throws IOException {
+        int c= 0 , n =0;
+        while(true){
+            c = System.in.read()-48;
+            if(c < 0 || c > 9) return n;
+            n = n * 10 + c;
         }
-        while(M-- > 0 ){
-            st = new StringTokenizer(br.readLine());
-            int i = Integer.parseInt(st.nextToken());
-            int j = Integer.parseInt(st.nextToken());
-            sb.append(arr[j]-(arr[i-1])).append("\n");
-        }
-        System.out.print(sb);
-    }
+     }
 
 }
