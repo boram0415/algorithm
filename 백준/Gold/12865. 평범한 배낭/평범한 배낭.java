@@ -1,35 +1,40 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.Arrays;
 
 public class Main {
+
+    static int[][] items;
+    static int[][] dp;
+
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] inputs = br.readLine().split(" ");
 
-        int N = Integer.parseInt(inputs[0]);
-        int K = Integer.parseInt(inputs[1]);
+        int N = read();
+        int K = read();
 
-        int[][] item = new int[N + 1][2];  // weight, value
+        items = new int[N + 1][2];
+        dp = new int[N + 1][K + 1];
 
         for (int i = 1; i <= N; i++) {
-            inputs = br.readLine().split(" ");
-            item[i][0] = Integer.parseInt(inputs[0]);
-            item[i][1] = Integer.parseInt(inputs[1]);
+            items[i][0] = read();
+            items[i][1] = read();
         }
-
-        int[][] dp = new int[N + 1][K + 1];
-
-        for (int k = 1; k <= K; k++) { // 무게
-            for (int i = 1; i <= N; i++) { // item
-                dp[i][k] = dp[i - 1][k];
-                if (k - item[i][0] >= 0) {
-                    dp[i][k] = Math.max(dp[i - 1][k], item[i][1] + dp[i - 1][k - item[i][0]]);
+        for (int k = 1; k <= K; k++) {
+            for (int n = 1; n <= N; n++) {
+                dp[n][k] = dp[n-1][k];
+                if (k-items[n][0] >= 0) {
+                    dp[n][k] = Math.max(dp[n-1][k], items[n][1] + dp[n-1][k-items[n][0]]);
                 }
             }
         }
-
-
         System.out.println(dp[N][K]);
+    }
+    
+        public static int read() throws IOException {
+        int c = 0, n = 0;
+        while (true) {
+            c = System.in.read() - 48;
+            if (c < 0 || c > 9) return n;
+            n = n * 10 + c;
+        }
     }
 }
