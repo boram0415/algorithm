@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.*;
 
@@ -22,19 +23,19 @@ class Main{
 
     public static void main(String args[]) throws Exception{
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        c = Integer.parseInt(st.nextToken()); // col
-        r = Integer.parseInt(st.nextToken()); // row
-        h = Integer.parseInt(st.nextToken()); // height
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        StringTokenizer st = new StringTokenizer(br.readLine());
+        c = read(); // col
+        r = read(); // row
+        h = read(); // height
         arr = new int[h + 1][r + 1][c + 1];
 
         // 값 초기화
         for (int i=1; i<=h; i++) {
             for (int j = 1; j <= r; j++) {
-                st = new StringTokenizer(br.readLine());
+//                st = new StringTokenizer(br.readLine());
                 for (int k = 1; k <= c; k++) {
-                    arr[i][j][k] = Integer.parseInt(st.nextToken());
+                    arr[i][j][k] = read();
                     if(arr[i][j][k]==1 ) graph.offer(new Node(i,j,k));
                 }
             }
@@ -80,6 +81,21 @@ class Main{
     private static boolean validCheck(int height , int row , int col) {
         if(col < 1 || col > c || row < 1 || row > r || height < 1 || height > h) return false;
         return arr[height][row][col] == 0;
+    }
+
+    private static int read() throws IOException {
+        int n, c;
+        boolean neg = false;
+        do {
+            n = System.in.read();
+            if (n == 45)
+                neg = true;
+        } while (n <= 45);
+        n &= 15;
+        while ((c = System.in.read()) > 45) {
+            n = (n << 3) + (n << 1) + (c & 15);
+        }
+        return neg ? -n : n;
     }
 
 }
