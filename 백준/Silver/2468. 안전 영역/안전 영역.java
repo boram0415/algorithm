@@ -1,66 +1,74 @@
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
 
-public class Main {
-        static int N;
-        static int[][] map;
-        static boolean[][] visited;
-        static int X[] = {-1, 1, 0, 0};
-        static int Y[] = {0, 0, -1, 1};
+class Main {
 
-        public static void main(String[] args) throws Exception {
+    static boolean visited[][];
+    static int graph[][];
+    static int result, max = Integer.MIN_VALUE ,cnt;
+    static int T, num;
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            N = Integer.parseInt(br.readLine());
-            map = new int[N][N];
-            visited = new boolean[N][N];
-            Set<Integer> set = new HashSet<>();
-            for (int i = 0; i < N; i++) {
-                StringTokenizer st = new StringTokenizer(br.readLine());
-                for (int j = 0; j < N; j++) {
-                    map[i][j] = Integer.parseInt(st.nextToken());
-                    set.add(map[i][j]);
-                }
+    public static void main(String[] args) throws Exception {
+
+        T = read();
+        graph = new int[T][T];
+        visited = new boolean[T][T];
+
+
+        // 값 초기화
+        for (int i = 0; i < T; i++) {
+            for (int j = 0; j < T; j++) {
+                int temp = read();
+                max = Math.max(temp, max);
+                graph[i][j] = temp;
             }
-            int cnt = 0;
-
-            Iterator<Integer> i = set.iterator();
-            while (i.hasNext()) {
-                visited = new boolean[N][N];
-                int tmp=0;
-                int n = i.next();
-                for (int x = 0; x < N; x++) {
-                    for (int j = 0; j < N; j++) {
-                        if (!visited[x][j] && map[x][j] > n) {
-                            tmp++;
-                            dfs(x, j,n);
-                        }
+        }
+        // 0~ 입력 최대 맥스 값 까지 순서대로 침수 지역 체크
+        for (int k = 0; k <= max; k++) {
+            cnt=0;
+            num=k;
+            visited = new boolean[T][T];
+            for (int i = 0; i < T; i++) {
+                for (int j = 0; j < T; j++) {
+                    if (!visited[i][j] && graph[i][j] > k) {
+                        dfs(i,j);
+                        cnt++;
                     }
                 }
-                cnt = Math.max(cnt, tmp);
             }
-            System.out.println(cnt==0?1:cnt);
+            result = Math.max(result, cnt);
         }
 
-        private static void dfs(int x, int y,int node) {
-            visited[x][y] = true;
-            Node n = new Node(x, y);
-            for (int i = 0; i < 4; i++) {
-                int nX = n.x + X[i];
-                int nY = n.y + Y[i];
-                if (nX < 0 || nX >= N || nY < 0 || nY >= N) continue;
-                if (visited[nX][nY] || map[x][y] <= node) continue;
-                dfs(nX, nY,node);
-            }
-        }
-
-        static class Node {
-            int x, y;
-
-            Node(int x, int y) {
-                this.x = x;
-                this.y = y;
-            }
-        }
+        System.out.println(result);
 
     }
+
+    private static void dfs(int i, int j) {
+        if (validCheck(i, j)) return;
+        visited[i][j] = true;
+        dfs(i + 1, j);
+        dfs(i - 1, j);
+        dfs(i, j - 1);
+        dfs(i, j + 1);
+    }
+
+    private static boolean validCheck(int i, int j) {
+        return (i < 0 || i >= T || j < 0 || j >= T || graph[i][j] <= num || visited[i][j]);
+    }
+
+    private static int read() throws IOException {
+        int n, c;
+        boolean neg = false;
+        do {
+            n = System.in.read();
+            if (n == 45)
+                neg = true;
+        } while (n <= 45);
+        n &= 15;
+        while ((c = System.in.read()) > 45) {
+            n = (n << 3) + (n << 1) + (c & 15);
+        }
+        return neg ? -n : n;
+    }
+
+}
