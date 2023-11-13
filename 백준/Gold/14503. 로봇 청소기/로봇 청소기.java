@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 class Main{
-
     static int N , M , r,c,d;
     static int[][] graph ;
     static int cnt=1;
@@ -11,7 +10,6 @@ class Main{
     static int[] dy = {0, 1, 0, -1};
 
     public static void main(String[] args) throws Exception{
-
         N = read();
         M = read();
         r = read();
@@ -24,41 +22,31 @@ class Main{
                 graph[i][j]=read();
             }
         }
-
-        bfs(r, c, d);
+        dfs(r, c, d);
         System.out.println(cnt);
-
-
     }
 
-    private static void bfs(int r, int c, int d) {
+    private static void dfs(int r, int c, int d) {
         // 청소 된 곳 표시
         graph[r][c] = -1;
         // 시계 반대 방향 진행
         for (int i = 0; i < 4; i++) {
             d = (d+3)%4;
-            int x = r + dx[d];
+             int x = r + dx[d];
             int y = c + dy[d];
-            if (!valid(x, y) && graph[x][y] == 0) {
+            if (graph[x][y] == 0) {
                 cnt++;
-                bfs(x, y, d);
+                dfs(x, y, d);
                 return;
             }
         }
-        // 후진
-        // 바라보는 쪽의 반대 뱡향으로 이동
+        // 후진 = 바라보는 쪽의 반대 뱡향으로 이동
         int pwd = (d+2)%4;
         int x = r + dx[pwd];
         int y = c + dy[pwd];
         // 뒤로 후진할 곳이 1이 아니면
-        if (!valid(x, y) && graph[x][y] != 1) {
-            bfs(x, y, d);
-        }
+        if (graph[x][y] != 1) dfs(x, y, d);
 
-    }
-
-    private static boolean valid(int r, int c ) {
-        return r < 0 && c < 0 && r > N && c > M;
     }
 
     static int read() throws Exception{
@@ -69,7 +57,4 @@ class Main{
             n=n*10+c;
         }
     }
-
-
-
 }
