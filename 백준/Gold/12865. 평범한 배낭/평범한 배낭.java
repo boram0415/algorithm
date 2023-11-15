@@ -1,22 +1,14 @@
-import java.io.*;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] inputs = br.readLine().split(" ");
-
-        int N = Integer.parseInt(inputs[0]);
-        int K = Integer.parseInt(inputs[1]);
-
-        int[][] item = new int[N + 1][2];  // weight, value
+    public static void main(String[] args) throws Exception {
+        int N = read();
+        int K = read();
+        int[][] item = new int[N + 1][2];
+        int[][] dp = new int[N + 1][K + 1];
 
         for (int i = 1; i <= N; i++) {
-            inputs = br.readLine().split(" ");
-            item[i][0] = Integer.parseInt(inputs[0]);
-            item[i][1] = Integer.parseInt(inputs[1]);
+            item[i][0] = read();
+            item[i][1] = read();
         }
-
-        int[][] dp = new int[N + 1][K + 1];
 
         for (int w = 1; w <= N; w++) { // 무게
             for (int i = 1; i <= K; i++) { // item
@@ -28,5 +20,13 @@ public class Main {
             }
         }
         System.out.println(dp[N][K]);
+    }
+    static int read()throws Exception{
+        int c=0,n=0;
+        while(true){
+            c=System.in.read()-48;
+            if(c < 0 || c  > 9) return n;
+            n=n*10+c;
+        }
     }
 }
