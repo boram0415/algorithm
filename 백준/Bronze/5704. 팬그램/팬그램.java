@@ -1,28 +1,31 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        while (true) {
-            int[] alpabet = new int[26];
-            String str = sc.nextLine().replace(" ", "");
-            if (str.equals("*"))
-                break;
-            for (int i = 0; i < str.length(); i++) {
-                ++alpabet[str.charAt(i) - 97];
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder(20);
+        String pan;
+        
+
+        while (!((pan = br.readLine()).equals("*"))) {
+            boolean flag = false;
+            int arr[] =new int[26];
+            pan = pan.replaceAll(" ", "");
+            for (int i = 0; i < pan.length(); i++) {
+                ++arr[pan.charAt(i)-97];
             }
-            String ret = "Y";
-            for (int i = 0; i < alpabet.length; i++) {
-                if (alpabet[i] == 0) {
-                    ret = "N";
+            for (int i : arr) {
+                if(i==0) {
+                    flag = true;
                     break;
                 }
             }
-            System.out.println(ret);
+            sb.append(flag ? "N" : "Y").append("\n");
         }
-
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
