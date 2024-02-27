@@ -1,57 +1,64 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-public class Main {
-    static int n;
-    static int[][] graph;
-    static boolean[][] visited;
+class Main {
+    static int graph[][];
+    static int T, L;
+
     static int[][] pos = {{-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}};
-    static int nowX, nowY;
-    static int desX, desY;
+    static boolean visited [][];
 
-    static void bfs(int x, int y) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
+    public static void main(String args[]) throws Exception {
 
-        while(!queue.isEmpty()) {
-            int[] now = queue.poll();
-            int nowX = now[0];
-            int nowY = now[1];
+        T = read();
 
-            for(int i=0; i<pos.length; i++) {
-                int nX = nowX + pos[i][0];
-                int nY = nowY + pos[i][1];
+        while (T-- > 0) {
 
-                if(nX < 0 || nX >= n || nY < 0 || nY >= n || visited[nX][nY] || graph[nX][nY] != 0) {
-                    continue;
+            L = read();
+            graph = new int[L][L];
+            visited = new boolean[L][L];
+            // 시작 x,y
+            int cpX = read(), cpY = read();
+            // 도착 x,y
+            int dpX = read(), dpY = read();
+
+            Queue<Node> q = new LinkedList<>();
+            q.add(new Node(cpX, cpY));
+            visited[cpX][cpY] =true;
+            while (!q.isEmpty()) {
+                Node node = q.poll();
+                for (int i = 0; i < 8; i++) {
+                    int x = node.x + pos[i][0];
+                    int y = node.y + pos[i][1];
+                    // 유효성 검사
+                    if( x < 0 || x >= L || y < 0 || y >= L || graph[x][y] != 0 || visited[x][y]) continue;
+                    visited[x][y] = true;
+                    graph[x][y] = graph[node.x][node.y]+1;
+                    q.add(new Node(x,y));
                 }
-
-                visited[nX][nY] = true;
-                graph[nX][nY] = graph[nowX][nowY] + 1;
-                queue.add(new int[] {nX, nY});
             }
+            System.out.println(graph[dpX][dpY]);
+        }
+
+    }
+
+    static class Node {
+        int x, y;
+
+        Node(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int test = sc.nextInt();
-
-        for (int t = 0; t < test; t++) {
-            n = sc.nextInt();
-            graph = new int[n][n];
-            visited = new boolean[n][n];
-
-            nowX = sc.nextInt();
-            nowY = sc.nextInt();
-            desX = sc.nextInt();
-            desY = sc.nextInt();
-
-            visited[nowX][nowY] = true;
-            bfs(nowX, nowY);
-            System.out.println(graph[desX][desY]);
-
+    public static int read() throws IOException {
+        int c = 0, n = 0;
+        while (true) {
+            c = System.in.read() - 48;
+            if (c < 0 || c > 9) return n;
+            n = n * 10 + c;
         }
     }
+
+
 }
