@@ -1,32 +1,29 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-
-    public static void main(String[] args) throws Exception{
-
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        char[] s = br.readLine().toCharArray();
-        int a=0,b=0;
-        for(int i=0;i<s.length;i++){
-            if(s[i]=='2'){
-                a++;
-            }else{
-                b++;
+        int length = Integer.parseInt(br.readLine());
+        String s = br.readLine(); 
+
+        int count2 = 0, countE = 0;
+
+        for (char c : s.toCharArray()) {
+            if (c == '2') {
+                count2++;
+            } else if (c == 'e') {
+                countE++;
             }
         }
 
-        if(a==b){
-            System.out.println("yee");
-        } else if (a < b) {
-            System.out.println("e");
-        }else{
+        if (count2 > countE) {
             System.out.println("2");
+        } else if (countE > count2) {
+            System.out.println("e");
+        } else {
+            System.out.println("yee");
         }
-
     }
-
-
 }
-
