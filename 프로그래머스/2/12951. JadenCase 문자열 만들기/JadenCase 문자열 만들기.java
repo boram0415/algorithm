@@ -12,11 +12,10 @@ class Solution {
                     result.append(Character.toUpperCase(c));  // 새로운 단어의 첫 글자는 대문자
                     newWord = false;
                 } else {
-                    result.append(Character.toLowerCase(c));  // 나머지 글자는 소문자
+                    result.append(Character.toLowerCase(c));  
                 }
             }
         }
-
         return result.toString();
     }
 }
