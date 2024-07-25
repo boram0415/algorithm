@@ -1,13 +1,13 @@
 class Solution {
-    public String solution(String s) {
-        String[] arr = s.toLowerCase().split("");
+    public String solution(String strings) {
+        String[] arr = strings.toLowerCase().split("");
         boolean check = true;
-        StringBuilder answer = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-        for(String one : arr){
-            answer.append(check ? one.toUpperCase() : one);
-            check = one.equals(" ") ? true : false;
+        for(String s : arr){
+            sb.append(check ? s.toUpperCase() : s);
+            check = s.equals(" ");
         }
-        return answer.toString();
+        return sb.toString();
     }
 }
