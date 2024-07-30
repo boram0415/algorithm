@@ -1,34 +1,23 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();  // Number of candidates
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfCandidates = Integer.parseInt(reader.readLine());
+        int maxVotes = Integer.parseInt(reader.readLine()); 
+        boolean carlosWins = true;
 
-        int[] votes = new int[N];
-        for (int i = 0; i < N; i++) {
-            votes[i] = scanner.nextInt();  // Votes each candidate received
-        }
-
-        int maxVotes = votes[0];  // Carlos is the first candidate
-        boolean carlosWins = true;  // Assume Carlos wins initially
-
-        for (int i = 1; i < N; i++) {
-            if (votes[i] > maxVotes) {
-                carlosWins = false;  // Someone has more votes than Carlos
+        for (int i = 1; i < numberOfCandidates; i++) {
+            int currentVotes = Integer.parseInt(reader.readLine());
+            if (currentVotes > maxVotes) {
+                carlosWins = false;
                 break;
-            } else if (votes[i] == maxVotes) {
-                // If tie, Carlos still wins because he registered first
-                carlosWins = true;
             }
         }
 
-        if (carlosWins) {
-            System.out.println("S");  // Carlos elected
-        } else {
-            System.out.println("N");  // Carlos not elected
-        }
-
-        scanner.close();
+        System.out.println(carlosWins ? "S" : "N");
+        reader.close();
     }
 }
