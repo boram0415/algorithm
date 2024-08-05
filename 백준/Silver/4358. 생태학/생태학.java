@@ -13,10 +13,16 @@ public class Main {
             totalTrees++;
         }
 
+        StringBuilder sb = new StringBuilder();
         // 출력
         for (Map.Entry<String, Integer> entry : treeCountMap.entrySet()) {
             double percentage = (entry.getValue() * 100.0) / totalTrees;
-            System.out.printf("%s %.4f%n", entry.getKey(), percentage);
+            sb.append(entry.getKey())
+              .append(" ")
+              .append(String.format("%.4f", Math.round(percentage * 10000) / 10000.0))
+              .append("\n");
         }
+
+        System.out.print(sb.toString());
     }
 }
