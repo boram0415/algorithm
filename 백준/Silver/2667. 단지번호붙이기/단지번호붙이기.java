@@ -3,72 +3,77 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    static int []X= {-1,1,0,0};
-    static int []Y= {0,0,-1,1};
-    static int [][]map;
-    static ArrayList<Integer> result = new ArrayList<>();
-    static boolean [][]visited;
-    static int N,cnt;
+    
+    // 4가지 방향(상, 하, 좌, 우)으로 이동하기 위한 방향
+    private static final int[] DX = {-1, 1, 0, 0};
+    private static final int[] DY = {0, 0, -1, 1};
 
+    private static char[][] map;
+    private static List<Integer> clusterSizes = new ArrayList<>();
+    private static int N;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        map=new int[N][N];
-        visited=new boolean[N][N];
+        map = new char[N][N];
+
         for (int i = 0; i < N; i++) {
-            String str = br.readLine();
-            for (int j = 0; j < N; j++) {
-                map[i][j]=str.charAt(j)-48;
-            }
+            map[i] = br.readLine().toCharArray();
         }
-        int sumCnt=0;
+
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if(!visited[i][j] && map[i][j]==1) {
-                    sumCnt++;
-                    cnt=0;
-                    bfs(i,j);
+                if (map[i][j] == '1') {
+                    int clusterSize = bfs(i, j);
+                    clusterSizes.add(clusterSize);
                 }
             }
         }
-        Collections.sort(result);
+
+        Collections.sort(clusterSizes);
         StringBuilder sb = new StringBuilder();
-        sb.append(sumCnt).append("\n");
-        for (int i : result) {
-            sb.append(i).append("\n");
+        sb.append(clusterSizes.size()).append("\n");
+        for (int size : clusterSizes) {
+            sb.append(size).append("\n");
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
-    private static void bfs(int x,int y) {
-        Queue<Node> q = new LinkedList<>();
-        q.add(new Node(x,y));
-        cnt++;
-        visited[x][y]=true;
-        while (!q.isEmpty()) {
-            Node n = q.poll();
-            for (int i = 0; i < 4; i++) {
-                int nX = n.x + X[i];
-                int nY = n.y + Y[i];
+    private static int bfs(int startX, int startY) {
+        int count = 0;
+        Queue<Point> queue = new LinkedList<>();
+        queue.add(new Point(startX, startY));
+        map[startX][startY] = 'f'; 
 
-                if(nX < 0 || nX >= N || nY < 0 || nY >= N ) continue;
-                if( visited[nX][nY] || map[nX][nY] == 0) continue;
-                cnt++;
-                visited[nX][nY]=true;
-                q.offer(new Node(nX, nY));
+        while (!queue.isEmpty()) {
+            Point current = queue.poll();
+            count++;
+
+
+            for (int direction = 0; direction < 4; direction++) {
+                int nextX = current.x + DX[direction];
+                int nextY = current.y + DY[direction];
+
+                if (isInBounds(nextX, nextY) && map[nextX][nextY] == '1') {
+                    map[nextX][nextY] = 'f';
+                    queue.offer(new Point(nextX, nextY));
+                }
             }
         }
-        result.add(cnt);
+
+        return count;
     }
 
-    static class Node{
-        int x,y;
-        Node(int x,int y){
-            this.x=x;
-            this.y=y;
+    private static boolean isInBounds(int x, int y) {
+        return x >= 0 && x < N && y >= 0 && y < N;
+    }
+
+    private static class Point {
+        int x, y;
+
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
-
-
 }
