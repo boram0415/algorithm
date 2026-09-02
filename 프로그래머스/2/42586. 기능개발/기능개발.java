@@ -1,23 +1,38 @@
 import java.util.*;
+
 class Solution {
-    static int N = 100;
-   public int[] solution(int[] progresses, int[] speeds) {
-       List<Integer> list = new ArrayList<>();
-        list.add(1);
-        int tmp = 0, max = -1;
-        for (int i = 0; i < progresses.length - 1; i++) {
-            // 나눠지지 않을 경우 +1day
-            int a = (int) Math.ceil((N - progresses[i]) / (double) speeds[i]);
-            int b = (int) Math.ceil((N - progresses[i + 1]) / (double) speeds[i + 1]);
-            // 앞에 있는 작업 소요 시간이 이후 오는 모든 작업의 소요시간보다 크면 같이 배포함
-            max = Math.max(a, max);
-            if (max >= b) {
-                list.set(tmp, list.get(tmp) + 1);
-                continue;
-            }
-            list.add(1);
-            tmp++;
+    public int[] solution(int[] progresses, int[] speeds) {
+        
+        
+        Deque<Integer> queue = new ArrayDeque<>();
+        ArrayList<Integer> list = new ArrayList<>(); 
+        
+        // 진행중 프젝과 스피드 비교해서 최대걸리는 일자 구하기
+        for(int i =0; i< speeds.length ;i++){
+            int tmp = (100-progresses[i]);
+            int a = tmp / speeds[i];
+            int b = tmp % speeds[i];
+            if(b > 0) a +=1;
+            queue.offer(a);
         }
-        return list.stream().mapToInt(i -> i).toArray();
+        
+        // 앞에 있는 숫자 보다 뒷 숫자가 작은경우 cnt 
+        while(!queue.isEmpty()){
+            int baseDay = queue.poll();
+            int cnt =1;
+            while(!queue.isEmpty() && queue.peek() <= baseDay){
+                queue.poll();
+                cnt++;
+            }
+            
+            list.add(cnt);
+        
+        }
+        
+        // 결과 값 큐에 넣어 큐 크기만큼 배열 만들어 거기 다시 쌓아야 하나 ? 
+        int[] answer = new int[list.size()];
+        for(int i =0 ; i < list.size() ; i ++) answer[i] = list.get(i);
+    
+        return answer;
     }
 }
