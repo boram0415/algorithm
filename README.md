@@ -45,6 +45,7 @@
 ## Dynamic Programming
 |  |
 | ------- |
+| [0070-climbing-stairs](https://github.com/boram0415/algorithm/tree/master/0070-climbing-stairs) |
 | [0322-coin-change](https://github.com/boram0415/algorithm/tree/master/0322-coin-change) |
 ## Knapsack Problem
 |  |
@@ -54,4 +55,12 @@
 |  |
 | ------- |
 | [0322-coin-change](https://github.com/boram0415/algorithm/tree/master/0322-coin-change) |
+## Math
+|  |
+| ------- |
+| [0070-climbing-stairs](https://github.com/boram0415/algorithm/tree/master/0070-climbing-stairs) |
+## Memoization
+|  |
+| ------- |
+| [0070-climbing-stairs](https://github.com/boram0415/algorithm/tree/master/0070-climbing-stairs) |
 <!---LeetCode Topics End-->
