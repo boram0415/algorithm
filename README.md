@@ -32,6 +32,7 @@
 ## Array
 |  |
 | ------- |
+| [0078-subsets](https://github.com/boram0415/algorithm/tree/master/0078-subsets) |
 | [0198-house-robber](https://github.com/boram0415/algorithm/tree/master/0198-house-robber) |
 | [0200-number-of-islands](https://github.com/boram0415/algorithm/tree/master/0200-number-of-islands) |
 | [0322-coin-change](https://github.com/boram0415/algorithm/tree/master/0322-coin-change) |
@@ -67,4 +68,12 @@
 |  |
 | ------- |
 | [0070-climbing-stairs](https://github.com/boram0415/algorithm/tree/master/0070-climbing-stairs) |
+## Backtracking
+|  |
+| ------- |
+| [0078-subsets](https://github.com/boram0415/algorithm/tree/master/0078-subsets) |
+## Bit Manipulation
+|  |
+| ------- |
+| [0078-subsets](https://github.com/boram0415/algorithm/tree/master/0078-subsets) |
 <!---LeetCode Topics End-->
