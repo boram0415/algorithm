@@ -32,6 +32,7 @@
 ## Array
 |  |
 | ------- |
+| [0046-permutations](https://github.com/boram0415/algorithm/tree/master/0046-permutations) |
 | [0078-subsets](https://github.com/boram0415/algorithm/tree/master/0078-subsets) |
 | [0198-house-robber](https://github.com/boram0415/algorithm/tree/master/0198-house-robber) |
 | [0200-number-of-islands](https://github.com/boram0415/algorithm/tree/master/0200-number-of-islands) |
@@ -71,6 +72,7 @@
 ## Backtracking
 |  |
 | ------- |
+| [0046-permutations](https://github.com/boram0415/algorithm/tree/master/0046-permutations) |
 | [0077-combinations](https://github.com/boram0415/algorithm/tree/master/0077-combinations) |
 | [0078-subsets](https://github.com/boram0415/algorithm/tree/master/0078-subsets) |
 ## Bit Manipulation
