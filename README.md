@@ -72,6 +72,7 @@
 ## Backtracking
 |  |
 | ------- |
+| [0017-letter-combinations-of-a-phone-number](https://github.com/boram0415/algorithm/tree/master/0017-letter-combinations-of-a-phone-number) |
 | [0046-permutations](https://github.com/boram0415/algorithm/tree/master/0046-permutations) |
 | [0077-combinations](https://github.com/boram0415/algorithm/tree/master/0077-combinations) |
 | [0078-subsets](https://github.com/boram0415/algorithm/tree/master/0078-subsets) |
@@ -85,9 +86,14 @@
 ## String
 |  |
 | ------- |
+| [0017-letter-combinations-of-a-phone-number](https://github.com/boram0415/algorithm/tree/master/0017-letter-combinations-of-a-phone-number) |
 | [0784-letter-case-permutation](https://github.com/boram0415/algorithm/tree/master/0784-letter-case-permutation) |
 ## Divide and Conquer
 |  |
 | ------- |
 | [0191-number-of-1-bits](https://github.com/boram0415/algorithm/tree/master/0191-number-of-1-bits) |
+## Hash Table
+|  |
+| ------- |
+| [0017-letter-combinations-of-a-phone-number](https://github.com/boram0415/algorithm/tree/master/0017-letter-combinations-of-a-phone-number) |
 <!---LeetCode Topics End-->
